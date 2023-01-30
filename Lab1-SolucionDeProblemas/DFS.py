@@ -74,5 +74,5 @@ class DFS(Framework):
         for llave,valor in path.items():
             pos.append(valor)
         pathF.append(pos)
-        return pathF
+        return pathF[0]
             

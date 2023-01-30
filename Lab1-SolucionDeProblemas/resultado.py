@@ -3,18 +3,20 @@ from PIL import Image
 class Resultado():
     def __init__(self, matriz1, matriz2):
         self.laberinto = matriz1
-        self.path = matriz2[0]
+        self.path = matriz2
     
     def marcarPath(self):
+        laberinto = self.laberinto.copy()
         self.path.pop(0)
         for i,j in self.path:
-            self.laberinto[i][j] = 4
-        return self.laberinto
+            laberinto[i][j] = 4
+        return laberinto
     
     def filename(self, path, algo):
         return './resultados/' + path.split('/')[-1].split('.')[0] + '_' + algo + '.bmp'
 
-    def dibujarFinal(self, matriz, filename):
+    def dibujarFinal(self, matriz1, filename):
+        matriz = matriz1.copy()
         img = Image.new('RGB', (len(matriz[0]), len(matriz)), "white")
         pixels = img.load()
         for i in range(img.size[0]):

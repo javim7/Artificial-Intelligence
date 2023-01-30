@@ -9,7 +9,7 @@ from laberinto import *
 '''
 obteniendo la matriz
 '''
-path = "./laberintos/lab1.bmp"
+path = "./laberintos/lab2.bmp"
 reader = Reader(path)
 reader.imageReader()
 matriz = reader.matriz
@@ -28,28 +28,28 @@ caminables = laberinto.getCaminables()
 '''
 algoritmo BFS y dibujando el resultado
 '''
-# bfs = BFS(matriz, inicial, finales, caminables)
-# pathBFS = bfs.bfs()
+bfs = BFS(matriz, inicial, finales, caminables)
+pathBFS = bfs.bfs()
 
-# resultadoBFS = Resultado(matriz, pathBFS)
-# matrizBFs = resultadoBFS.marcarPath()
-# filename = resultadoBFS.filename(path, 'BFS')
-# resultadoBFS.dibujarFinal(matrizBFs, filename)
+resultadoBFS = Resultado(matriz, pathBFS)
+matrizBFs = resultadoBFS.marcarPath()
+filename = resultadoBFS.filename(path, 'BFS')
+resultadoBFS.dibujarFinal(matrizBFs, filename)
 
 '''
 algoritmo DFS y dibujando el resultado
 '''
-# dfs = DFS(matriz, inicial, finales, caminables)
-# pathDFS = dfs.dfs()
+dfs = DFS(matriz, inicial, finales, caminables)
+pathDFS = dfs.dfs()
 
-# resultadoDFS = Resultado(matriz, pathDFS)
-# matrizDFs = resultadoDFS.marcarPath()
-# filename = resultadoDFS.filename(path, 'DFS')
-# resultadoDFS.dibujarFinal(matrizDFs, filename)
+resultadoDFS = Resultado(matriz, pathDFS)
+matrizDFs = resultadoDFS.marcarPath()
+filename = resultadoDFS.filename(path, 'DFS')
+resultadoDFS.dibujarFinal(matrizDFs, filename)
 
-'''
-algoritmo A* y dibujando el resultado
-'''
+# '''
+# algoritmo A* y dibujando el resultado
+# '''
 astar = AStar(matriz, inicial, finales, caminables)
 celdas = astar.matrizACeldas(matriz) #definiendo diccionario de celdas
 astar.inicialFinal(celdas) # inicial y finales
