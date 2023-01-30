@@ -10,14 +10,14 @@ class BFS(Framework):
         
         moves = []
         
+        if ((i,j+1) in self.caminables):
+            moves.append((i,j+1))
+        if ((i-1,j) in self.caminables):
+            moves.append((i-1,j))
         if ((i+1,j) in self.caminables):
             moves.append((i+1,j))
         if ((i,j-1) in self.caminables):
             moves.append((i,j-1))
-        if ((i-1,j) in self.caminables):
-            moves.append((i-1,j))
-        if ((i,j+1) in self.caminables):
-            moves.append((i,j+1))
         
         return moves
 
