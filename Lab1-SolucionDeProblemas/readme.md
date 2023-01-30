@@ -2,7 +2,7 @@
 ### Laboratorio 1: Solucion de problemas
 
 # Descripcion
-#### Descipcion general
+#### Descripcion general
 El programa recibe una imagen cuadrada como entrada, la cual representa un laberinto. Con dicha imagen, el programa debe de dibujar la solucion de este laberinto. Para esto, se deben de completar 4 tasks.
 
 #### Restricciones a considerar
