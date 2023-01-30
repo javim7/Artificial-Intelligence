@@ -1,4 +1,3 @@
-from PIL import Image
 from framework import *
 
 class DFS(Framework):
@@ -9,30 +8,71 @@ class DFS(Framework):
     def actions(self, estado):
         i, j = estado
         
-        movimientosPosibles = []
+        moves = []
         
-        if ((i,j+1) in self.caminables) or ((i,j+1) in self.finales):
-            movimientosPosibles.append((i,j+1))
-        if ((i,j-1) in self.caminables) or ((i,j-1) in self.finales):
-            movimientosPosibles.append((i,j-1))
-        if ((i+1,j) in self.caminables) or ((i+1,j) in self.finales):
-            movimientosPosibles.append((i+1,j))
-        if ((i-1,j) in self.caminables) or ((i-1,j) in self.finales):
-            movimientosPosibles.append((i-1,j))
+        if ((i-1,j) in self.caminables):
+            moves.append((i-1,j))
+        if ((i,j-1) in self.caminables):
+            moves.append((i,j-1))
+        if ((i+1,j) in self.caminables):
+            moves.append((i+1,j))
+        if ((i,j+1) in self.caminables):
+            moves.append((i,j+1))
         
-        return movimientosPosibles
+        return moves
 
     def result(self, estado, accion):
-        return super().result(estado, accion)
+        return accion
 
     def goal_test(self, estado):
         return estado in self.finales
 
     def stepCost(self, estado, accion, estado2):
-        return super().stepCost(estado, accion, estado2)
+        pass
 
     def path_cost(self, matriz):
-        return super().path_cost(matriz)
-    
-    def dfs(self):
         pass
+
+    def dfs(self):
+        fronteras = self.fronteras.copy()
+        visitados = self.visitados.copy()
+        visitados.append(self.inicial)
+        path = {}
+
+        while True:
+            if len(fronteras):
+
+                estado = fronteras[-1] 
+                # print("estado",estado)
+
+                if self.goal_test(estado):
+                    return self.pathRecorrido(path, estado)
+
+                acciones = self.actions(estado)
+                vecino = False
+                for a in acciones:
+                    if a not in visitados:
+                        fronteras.append(a)
+                        visitados.append(a)
+                        path[a] = estado
+                        vecino = True
+                        break
+                if vecino == False:
+                    fronteras.pop()
+                
+            else:
+                return False
+
+    def pathRecorrido(self, diccionario, estado):
+        path = {}
+        pos = []
+        pathF = self.pathFinal.copy()
+        while estado != self.inicial:
+            path[diccionario[estado]] = estado
+            estado = diccionario[estado]
+        
+        for llave,valor in path.items():
+            pos.append(valor)
+        pathF.append(pos)
+        return pathF
+            

@@ -1,4 +1,3 @@
-from celda import *
 import networkx as nx
 
 class Laberinto():
@@ -26,7 +25,7 @@ class Laberinto():
     def getCaminables(self):
         for i in range(len(self.matriz)):
             for j in range(len(self.matriz[i])):
-                if self.matriz[i][j] == 1:
+                if self.matriz[i][j] == 1 or self.matriz[i][j] == 2 or self.matriz[i][j] == 3:
                     self.caminables.append((i,j))
         return self.caminables
 

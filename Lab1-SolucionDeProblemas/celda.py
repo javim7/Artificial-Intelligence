@@ -1,18 +1,18 @@
 class Celda():
-    def __init__(self, x,y, color):
-        self.posicion = [y,x]
-        self.padre = None
-        self.vecinoArriba = None
-        self.vecinoAbajo = None
-        self.vecinoIzquierda = None
-        self.vecinoDerecha = None
+    def __init__(self, pos, color):
         self.color = color
+        self.pos = pos
+        self.parent = None
+        self.g = 0
+        self.h = 0
+        self.f = 0
 
-    def identificador(self):
-        return [self.color,self.position[0],self.position[1]]
-    
-    def movimiento(self):
-        return [self.VecinoIzquierda,self.VecinoArriba,self.VecinoAbajo,self.VecinoDerecha]
-    
-    def color(self):
-        return self.color
+    def __str__(self):
+        if self.color == 0:
+            return str('Color: N' + ' Pos: ' + str(self.pos))
+        if self.color == 1:
+            return str('Color: B' + ' Pos: ' + str(self.pos))
+        if self.color == 2:
+            return str('Color: R' + ' Pos: ' + str(self.pos))
+        if self.color == 3:
+            return str('Color: V' + ' Pos: ' + str(self.pos))

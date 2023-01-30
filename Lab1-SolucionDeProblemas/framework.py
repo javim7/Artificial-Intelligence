@@ -6,31 +6,29 @@ class Framework(ABC):
         self.finales = finales
         self.caminables = caminables
         self.matriz = matriz
-        self.visitados = []
         self.camino = []
-        self.fronteras = []
+        self.visitados = [] #closed
+        self.fronteras = [] #opened
+        self.pathFinal = []
         self.fronteras.append(inicial)
         # self.visitados.append(inicial)
     
     @abstractmethod
     def actions(self, estado):
-        return self.matriz.get_actions(estado)
+        pass
 
     @abstractmethod
     def result(self, estado, accion):
-        return self.matriz.get_result(estado, accion)
+        pass
 
     @abstractmethod
     def goal_test(self, estado):
-        return estado == self.sestadoFinales
+        pass
 
     @abstractmethod
     def path_cost(self, matriz):
-        costo = 0
-        for i in range(len(matriz)-1):
-            costo += self.stepCost(matriz[i], matriz[i+1])
-        return costo
+        pass
 
     @abstractmethod
     def stepCost(self, estado, accion, estado2):
-       return self.matriz.get_step_cost(estado, accion)
+       pass

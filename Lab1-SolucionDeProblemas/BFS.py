@@ -8,53 +8,68 @@ class BFS(Framework):
     def actions(self, estado):
         i, j = estado
         
-        movimientosPosibles = []
+        moves = []
         
-        if ((i,j+1) in self.caminables) or ((i,j+1) in self.finales):
-            movimientosPosibles.append((i,j+1))
-        if ((i,j-1) in self.caminables) or ((i,j-1) in self.finales):
-            movimientosPosibles.append((i,j-1))
-        if ((i+1,j) in self.caminables) or ((i+1,j) in self.finales):
-            movimientosPosibles.append((i+1,j))
-        if ((i-1,j) in self.caminables) or ((i-1,j) in self.finales):
-            movimientosPosibles.append((i-1,j))
+        if ((i+1,j) in self.caminables):
+            moves.append((i+1,j))
+        if ((i,j-1) in self.caminables):
+            moves.append((i,j-1))
+        if ((i-1,j) in self.caminables):
+            moves.append((i-1,j))
+        if ((i,j+1) in self.caminables):
+            moves.append((i,j+1))
         
-        return movimientosPosibles
+        return moves
 
     def result(self, estado, accion):
-        return super().result(estado, accion)
+        return accion
 
     def goal_test(self, estado):
         return estado in self.finales
 
     def stepCost(self, estado, accion, estado2):
-        return super().stepCost(estado, accion, estado2)
+        pass
 
     def path_cost(self, matriz):
-        return super().path_cost(matriz)
-    
+        pass
+
     def bfs(self):
-        fronteras = self.fronteras
-        visitados = self.visitados
-       
-        x = 0
-        while x <5:
+        fronteras = self.fronteras.copy()
+        visitados = self.visitados.copy()
+        path = {}
+
+        while True:
             if len(fronteras):
 
-                visitados.append(fronteras.pop(0))
-                print(visitados)
+                popeado = fronteras.pop(0)
+                if popeado not in visitados:
+                    visitados.append(popeado)
+                visitados.append(popeado)        
                 estado = visitados[-1]
-                print(estado)
 
                 if self.goal_test(estado):
-                    return visitados
+                    return self.pathRecorrido(path, estado)
+
                 acciones = self.actions(estado)
                 for a in acciones:
-                    copyvisitados = visitados.copy()
-                    copyvisitados.append(a)
-                    fronteras.append(copyvisitados)
-                print(fronteras) 
+                    if a not in visitados:
+                        fronteras.append(a)
+                        visitados.append(a)
+                        path[a] = popeado
             else:
                 return False
 
+    def pathRecorrido(self, diccionario, estado):
+        path = {}
+        pos = []
+        pathF = self.pathFinal.copy()
+
+        while estado != self.inicial:
+            path[diccionario[estado]] = estado
+            estado = diccionario[estado]
+        
+        for llave,valor in path.items():
+            pos.append(valor)
+        pathF.append(pos)
+        return pathF
             
