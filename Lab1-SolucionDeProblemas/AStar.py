@@ -1,5 +1,6 @@
 from framework import *
 from celda import *
+import math
 
 class AStar(Framework):
     def __init__(self, matriz, inicial, finales, caminables):
@@ -29,6 +30,11 @@ class AStar(Framework):
         i, j = celda.pos
         x, y = self.finales[0].pos
         return abs(i-x) + abs(j-y)
+
+    def euclideanHeuristic(self, celda):
+        i, j = celda.pos
+        x, y = self.finales[0].pos
+        return math.sqrt((i-x)**2 + (j-y)**2)
 
     def gCost(self, celda):
         i, j = celda.pos
@@ -75,7 +81,7 @@ class AStar(Framework):
     def path_cost(self, matriz):
         pass
 
-    def AStar(self):
+    def AStarM(self):
         self.opened.append(self.inicial)
 
         x = 0
@@ -100,6 +106,40 @@ class AStar(Framework):
                         a.g = self.gCost(a) + q.g
                         # print("a.g ",a.g)
                         a.h = self.manhattanHeuristic(a)
+                        a.f = a.g + a.h
+                        a.parent = q
+                self.closed.append(q)
+                # print("opened", self.opened)
+                # print("closed", self.closed)
+
+            else:
+                False
+
+    def AStarE(self):
+        self.opened.append(self.inicial)
+
+        x = 0
+        while True:
+            x+=1
+            if self.opened:
+                q = self.fMenor(self.opened)
+                # print("estado", q.pos)
+                self.opened.remove(q)
+                q.g = self.gCost(q)
+                # print("q.g ",q.g)
+
+                if self.goal_test(q):
+                     return self.pathRecorrido(q)
+
+                acciones = self.actions(q)
+                for a in acciones:
+                    if a in self.closed:
+                        continue
+                    if a not in self.opened:
+                        self.opened.append(a)
+                        a.g = self.gCost(a) + q.g
+                        # print("a.g ",a.g)
+                        a.h = self.euclideanHeuristic(a)
                         a.f = a.g + a.h
                         a.parent = q
                 self.closed.append(q)

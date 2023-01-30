@@ -25,6 +25,13 @@ El programa recibe una imagen cuadrada como entrada, la cual representa un laber
     2. DFS algorithm
     3. A* algorithm
 3. Se seleciona una de las siguientes opciones y tener en cuenta que la opcion 3 tiene dos subopciones las cuales son las huristicas. 
+    1. Manhattan Heuristic
+    2. Euclidean Heuristic
+
+# Heuristicas
+Para el algoritmo A*, se utilizaron dos heuristicas, Manhattan y Euclidean.
+1. Manattan fue la priemra eleccion, ya que este heuristica sirve para laberintos o mapas en donde solo se puede mover en 4 direcciones; arriba, abajo, derecha e izquierda. Ya que este era el caso de los laberintos utilizados, se decidio utilizar esta heuristica.
+2. Euclidean fue la segunda eleecion, esta heuristica se puede utilizare para mapas en donde se pueda mover en cualquier direccion, pero tambien es valido usarla en mapas en donde solo se pueda mover en 4 direcciones. Por lo tanto, se decidio utilizar esta heuristica en el programa.
 
 # Autor 
 ### Javier Mombiela
