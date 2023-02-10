@@ -7,6 +7,9 @@ jobs:
 
     runs-on: ubuntu-latest
     
+    env:
+      working_directory: ../Lab2-InferenciaProbabilistica
+      
     defaults:
       run:
         working-directory: ${{ env.working-directory }}
