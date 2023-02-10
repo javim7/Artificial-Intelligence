@@ -1,6 +1,6 @@
 name: Push to PyPI
 
-on: push
+on: [push]
 
 jobs:
   cd:
