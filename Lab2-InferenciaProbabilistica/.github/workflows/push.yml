@@ -1,6 +1,6 @@
-name: Push to PyPI
+name: Push to PyPI and pull request
 
-on: [push]
+on: [push, merge]
 
 jobs:
   cd:
