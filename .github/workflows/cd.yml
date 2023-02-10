@@ -6,6 +6,10 @@ jobs:
   cd:
 
     runs-on: ubuntu-latest
+    
+    defaults:
+      run:
+        working-directory: ${{ env.working-directory }}
 
     steps:
     - name: Setup python
